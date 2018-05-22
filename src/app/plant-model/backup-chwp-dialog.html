@@ -1,0 +1,68 @@
+<div class="add-chiller dialog">
+    <div fxLayout="row" class="dialog-header">
+        <span fxFlex>Backup CHWP - {{data.name}}</span>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon class="color-2" aria-label="Close">close</mat-icon>
+        </button>
+    </div>
+
+    <div class="dialog-content">
+        <div class="inputDialog chwp-info">
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Simulator Index" [(ngModel)]="data.index">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="CHWP ID" [(ngModel)]="data.id">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div> -->
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="CHWP Name" [(ngModel)]="data.name">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Head (Cubic Factor)" [value]="0">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Head (Proportional Factor)" [value]="0">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Flow Rate[m3/h]" [(ngModel)]="data.flowRateCHWP">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Maximum Flow Rate Ratio[%]" [(ngModel)]="data.maxFlowCHWP">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Minimum Flow Rate Ratio[%]" [(ngModel)]="data.minFlowCHWP">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Related Pump" [(ngModel)]="data.relatedPump" disabled>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="divider-h "></div>
+    <mat-dialog-actions class="dialog-footer ">
+        <button mat-button [mat-dialog-close]="data">Set Default Values</button>
+        <div fxFlex></div>
+        <button mat-button [mat-dialog-close]="data" [disabled]="compareData()">Save</button>
+    </mat-dialog-actions>
+</div>

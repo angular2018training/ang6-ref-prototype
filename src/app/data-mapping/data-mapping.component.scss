@@ -1,0 +1,19 @@
+@import '~styles/styles';
+@import '~styles/es-navi';
+
+.custom-row {
+  height: 40px;
+}
+.custom-row:not(:last-child) {
+  border-bottom: 1px rgba(0, 0, 0, 0.12) solid;
+}
+
+.weather-row-item {
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.weather-row-item>span {
+  width: 40%;
+}

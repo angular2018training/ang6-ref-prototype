@@ -1,0 +1,183 @@
+<div fxFill fxLayout="column">
+  <div>
+    <mat-form-field floatPlaceholder="always">
+      <mat-select placeholder="Mapping Type" [(ngModel)]="mappingType" (change)="changeMappingType($event)">
+        <mat-option *ngFor="let type of listMappingType" [value]="type.value">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="mappingType === 1" fxLayout="column">
+    <div fxLayout="row" class="">
+      <div fxFlex></div>
+      <!-- <button class="red-btn" type="button" mat-button (click)="exportHandler()" [disabled]="data.length === 0">Export</button>
+      <button class="red-btn m-l-20" type="button" mat-button (click)="importHandler()">Import</button>
+      <button class="red-btn m-l-20" type="button" mat-button (click)="clearHandler()" [disabled]="data.length === 0">Clear</button> -->
+      <button class="red-btn m-r-20" type="button" mat-button>Save</button>
+      <button class="red-btn m-r-10" type="button" mat-button>Collect Tag Name</button>
+    </div>
+    <div class="m-t-20" style="height: 50vh; overflow-y:auto" fxLayout="column">
+      <td-data-table class="custom-table" #dataTable [data]="filteredData" [columns]="columns" [selectable]="" [clickable]="" [multiple]=""
+        [sortBy]="sortBy" [(ngModel)]="selectedRows" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+        <ng-template tdDataTableTemplate="simulatorIndex" let-value="value" let-row="row" let-column="column">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <span fxFlex>{{value}}</span>
+            <button *ngIf="row['type'] === 'CT' || row['type'] === 'Backup-CT'" mat-icon-button (click)="showMCTDialog(row)">
+              <mat-icon class="color-1" aria-label="Add">add_box</mat-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template tdDataTableTemplate="equimentName" let-value="value" let-row="row" let-column="column">
+          <div *ngFor="let eqName of value; let i = index" fxLayout="row" fxLayoutAlign="start center" class="custom-row">
+            <div class="full-w">
+              <editable-input [text]="eqName" (callback)="editEquimentName($event, row, i)"></editable-input>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template tdDataTableTemplate="tagName" let-value="value" let-row="row" let-column="column">
+          <div *ngFor="let tagName of value; let i = index" fxLayout="row" fxLayoutAlign="start center" class="custom-row">
+            <span fxFlex>{{tagName}}</span>
+            <button *ngIf="row['type'] === 'CT' || row['type'] === 'Backup-CT'" mat-icon-button (click)="deleteMCT(row,i)">
+              <mat-icon class="color-1" aria-label="Add">delete</mat-icon>
+            </button>
+          </div>
+        </ng-template>
+      </td-data-table>
+    </div>
+    <!-- <td-paging-bar fxFlex #pagingBar [pageSize]="pageSize" [total]="filteredTotal" (change)="page($event)">
+      <span hide-xs>Rows per page:</span>
+      <mat-select [style.width.px]="50" [(ngModel)]="pageSize">
+        <mat-option *ngFor="let size of pageSizes" [value]="size">
+          {{size}}
+        </mat-option>
+      </mat-select>
+      <span>{{pagingBar.range}}</span>
+      <span hide-xs>of {{pagingBar.total}}</span>
+    </td-paging-bar> -->
+  </div>
+  <div *ngIf="mappingType === 2" fxLayout="column" class="m-l-20" style="width: 75%;">
+    <mat-radio-group fxLayout="row" [(ngModel)]="weatherModel.usingType">
+      <mat-radio-button fxFlex="40" [value]="1">Using Weather Collector</mat-radio-button>
+      <mat-radio-button fxFlex [value]="2">Using Weather Service</mat-radio-button>
+    </mat-radio-group>
+
+    <div *ngIf="weatherModel.usingType === 1" fxLayout="column">
+      <div fxLayout="column">
+        <div class="m-t-20" fxLayout="row">
+          <span class="fs-20 fw-bold" fxFlex="40">Measured Data</span>
+          <span class="fs-20 fw-bold m-r-20" fxFlex>Customer's tag name</span>
+          <span class="fs-20 fw-bold" fxFlex>Green Koncepts tag name</span>
+        </div>
+        <div class="weather-row-item">
+          <span>1. Outdoor Dry Bulb Temperature</span>
+          <div class="m-r-20" fxFlex>
+            <mat-form-field class="custom-input full-w">
+              <mat-select [(ngModel)]="weatherModel.temperature">
+                <mat-option *ngFor="let item of outdoorTemperatures" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex>
+            <mat-form-field class="custom-input full-w">
+              <mat-select [(ngModel)]="weatherModel.temperature">
+                <mat-option *ngFor="let item of outdoorTemperatures" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="weather-row-item">
+          <span>2. Outdoor Relative Humidity</span>
+          <div class="m-r-20" fxFlex>
+            <mat-form-field class="custom-input full-w">
+              <mat-select [(ngModel)]="weatherModel.humidity">
+                <mat-option *ngFor="let item of outdoorHumidities" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex>
+            <mat-form-field class="custom-input full-w">
+              <mat-select [(ngModel)]="weatherModel.humidity">
+                <mat-option *ngFor="let item of outdoorHumidities" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="weatherModel.usingType === 2" fxLayout="column">
+      <div class="m-t-10" fxLayout="column">
+        <div class="weather-row-item">
+          <span>Weather Service</span>
+          <div fxFlex>
+            <mat-form-field class="custom-input full-w">
+              <mat-select [(ngModel)]="weatherModel.weatherService">
+                <mat-option *ngFor="let item of weatherServices" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="weather-row-item">
+          <span>Location</span>
+          <div fxFlex>
+            <mat-form-field class="custom-input full-w">
+              <mat-select [(ngModel)]="weatherModel.location">
+                <mat-option *ngFor="let item of locations" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column">
+        <div class="m-t-20" fxLayout="row">
+          <span class="fs-20 fw-bold" fxFlex="40">Measured Data</span>
+          <span class="fs-20 fw-bold" fxFlex>Tag name</span>
+        </div>
+        <div class="weather-row-item">
+          <span>1. Outdoor Dry Bulb Temperature</span>
+          <div fxFlex>
+            <mat-form-field class="custom-input full-w">
+              <mat-select [(ngModel)]="weatherModel.temperature">
+                <mat-option *ngFor="let item of outdoorTemperatures" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="weather-row-item">
+          <span>2. Outdoor Relative Humidity</span>
+          <div fxFlex>
+            <mat-form-field class="custom-input full-w">
+              <mat-select [(ngModel)]="weatherModel.humidity">
+                <mat-option *ngFor="let item of outdoorHumidities" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-t-10">
+      <div fxFlex></div>
+      <button *ngIf="weatherModel.usingType === 1" class="red-btn m-r-20" type="button" mat-button> Collect Tag Name </button>
+      <button *ngIf="weatherModel.usingType === 2" class="red-btn m-r-20" type="button" mat-button> Test Connection </button>
+      <button class="red-btn" type="button" mat-button> Save </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<!-- UPDATE UNIT PRICE -->
+<div class="dialog" fxLayout="column">
+    <div class="dialog-header">
+        <span fxFlex>Unit Price Detail</span>
+        <button mat-icon-button (click)="onNoSaveClick()">
+            <mat-icon class="color-2" aria-label="Close">close</mat-icon>
+        </button>
+    </div>
+    <div fxFlex class="dialog-content">
+
+        <div class="dialog-content__id">
+            <mat-form-field floatPlaceholder="always">
+                <input [(ngModel)]="dataTemp.priceId" required matInput placeholder="Price ID">
+                <mat-error align="right">This field is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="dialog-content__datetime">
+
+            <mat-form-field floatPlaceholder="always">
+                <input matInput [(ngModel)]="dataTemp.fromDate" [matDatepicker]="fromDate" placeholder="From Date">
+                <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                <mat-datepicker #fromDate></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field floatPlaceholder="always">
+                <input [(ngModel)]="dataTemp.toDate" matInput [matDatepicker]="toDate" placeholder="To Date">
+                <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                <mat-datepicker #toDate></mat-datepicker>
+            </mat-form-field>
+
+        </div>
+
+        <div class="dialog-content__status">
+            <mat-form-field floatPlaceholder="always">
+                <mat-select placeholder="Status" [(ngModel)]="dataTemp.status">
+                    <mat-option *ngFor="let item of status" [value]="item.id">
+                        {{ item.label }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="dialog-content__type">
+            <mat-form-field floatPlaceholder="always">
+                <mat-select placeholder="Type" [(ngModel)]="dataTemp.type" (change)="changeType($event)">
+                    <mat-option *ngFor="let item of types" [value]="item.id">
+                        {{ item.label }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="dialog-content__currency">
+            <mat-form-field floatPlaceholder="always">
+                <mat-select placeholder="Currency" [(ngModel)]="dataTemp.currency">
+                    <mat-option *ngFor="let item of currency" [value]="item.id">
+                        {{ item.label }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngFor="let item of dataTemp.unitPriceValue" class="dialog-content__unit-price-value">
+            <mat-form-field floatPlaceholder="always">
+                <input type="number" [(ngModel)]="item.unitValue" matInput placeholder="Unit Price Value">
+            </mat-form-field>
+
+            <mat-form-field floatPlaceholder="always">
+                <!-- <input type="time" disabled="{{disabled}}" [(ngModel)]="item.fromTime" matInput placeholder="From"> -->
+
+                <input type="time" *ngIf="!disabled" [(ngModel)]="item.fromTime" matInput placeholder="From">
+                <input type="time" disabled *ngIf="disabled" value="01:00" matInput placeholder="From">
+            </mat-form-field>
+
+            <mat-form-field floatPlaceholder="always">
+                <!-- <input type="time" disabled="{{disabled}}" [(ngModel)]="item.toTime" matInput placeholder="To"> -->
+
+                <input type="time" *ngIf="!disabled" [(ngModel)]="item.toTime" matInput placeholder="To">
+                <input type="time" disabled *ngIf="disabled" value="23:59" matInput placeholder="To">
+            </mat-form-field>
+
+            <div class="dialog-content__unit-price-value__group-icon" *ngIf="dataTemp.type==2">
+                <mat-icon (click)="removeUnit()">indeterminate_check_box</mat-icon>
+                <mat-icon (click)="addUnit()">add_box</mat-icon>
+            </div>
+        </div>
+
+        <div style="color:red; font-weight:bold;" *ngIf="notifyRemove === true">
+            Cannot Remove !
+        </div>
+        <div style="color:red; font-weight:bold; margin-left:20px;" *ngIf="notifyTimeLimit === true">
+            Your Time has met the limit !
+        </div>
+        <div style="color:red; font-weight:bold; margin-left:20px;" *ngIf="notifyCompareTime === true">
+            Your From Time is larger than you To Time !
+        </div>
+
+    </div>
+    <div class="divider-h"></div>
+    <mat-dialog-actions class="dialog-footer">
+        <div fxFlex></div>
+        <!-- <button mat-button mat-dialog-close>No</button> -->
+        <!-- Can optionally provide a result for the closing dialog. -->
+        <button disabled="{{disabledSave}}" mat-button [mat-dialog-close]="dataTemp">Save</button>
+    </mat-dialog-actions>
+</div>

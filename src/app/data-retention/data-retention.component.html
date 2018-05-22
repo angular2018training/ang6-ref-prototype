@@ -1,0 +1,161 @@
+<div fxFill fxLayout="column" class="data-retention-container">
+    <div class="full-w">
+        <mat-checkbox [(ngModel)]="isDisabled">Data Retention</mat-checkbox>
+
+        <mat-form-field class="{{!isDisabled ? 'opacity03' : ''}}" floatPlaceholder="always">
+            <input [disabled]="!isDisabled" matInput [(ngModel)]="inputDataRetention">
+        </mat-form-field>
+
+        <mat-form-field class="{{!isDisabled ? 'opacity03' : ''}}" floatPlaceholder="always" class="custom-input">
+            <mat-select [disabled]="!isDisabled" [(ngModel)]="selectedTimeUnit" placeholder="Time Unit">
+                <mat-option *ngFor="let timeUnit of timeUnits" [value]="timeUnit">
+                    {{ timeUnit }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="schedule-setting-container m-t-20" class="{{!isDisabled ? 'opacity03' : ''}}">
+        <fieldset class="field-set-wrapper">
+            <legend>Schedule Settings</legend>
+            <div class="scroll-content">
+                <!-- <div class="startTime-select-row full-w" *ngFor="let selectedStartTime of listSelectedStartTime ; let index = index" fxLayout="row">
+                    <mat-form-field class="" floatPlaceholder="always">
+                        <mat-select [disabled]="!isDisabled" placeholder="StartTime" [(ngModel)]="selectedStartTime.startTime">
+                            <mat-option *ngFor="let startTime of startTimes;" [value]="startTime">
+                                {{ startTime }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div>
+                        <mat-form-field>
+                            <input type="text" matInput required placeholder="Schedule Name" [(ngModel)]="data.scheduleName">
+                            <mat-error>This field is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field floatPlaceholder="always">
+                            <mat-select placeholder="Status" [(ngModel)]="data.status">
+                                <mat-option *ngFor="let item of statusList" [value]="item">
+                                    {{item}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field floatPlaceholder="always">
+                            <mat-select placeholder="Schedule Type" [(ngModel)]="data.type">
+                                <mat-option *ngFor="let item of types" [value]="item.id">
+                                    {{item.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <button [disabled]="!isDisabled" *ngIf="listSelectedStartTime.length > 1" mat-icon-button (click)="deleteItem('starttime',index)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                    <button [disabled]="!isDisabled" mat-icon-button (click)="addItem('starttime', index)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div> -->
+
+  
+
+                <div fxLayout="column" class="m-t-20">
+                    <span>Recurrence Pattern</span>
+                    <mat-radio-group [disabled]="!isDisabled" class="m-t-10" [(ngModel)]="selectedSequence">
+                        <mat-radio-button fxFlex="25" value="daily">Daily</mat-radio-button>
+                        <mat-radio-button fxFlex="25" value="weekly">Weekly</mat-radio-button>
+                        <mat-radio-button fxFlex="25" value="monthly">Monthly</mat-radio-button>
+                        <mat-radio-button fxFlex="25" value="yearly">Yearly</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="m-t-20" *ngIf="selectedSequence == 'monthly'">
+                    <div class="startTime-select-row full-w" *ngFor="let selectedMonthlyData of listSelectedMonthlyData ; let index = index"
+                        fxLayout="row">
+                        <mat-form-field class="" floatPlaceholder="always">
+                            <mat-select [disabled]="!isDisabled" placeholder="Select day" [(ngModel)]="selectedMonthlyData.day">
+                                <mat-option *ngFor="let dayInMonth of dayInMonths;" [value]="dayInMonth">
+                                    {{ dayInMonth }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <button [disabled]="!isDisabled" *ngIf="listSelectedMonthlyData.length > 1" mat-icon-button (click)="deleteItem('monthly', index)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                        <button [disabled]="!isDisabled" mat-icon-button (click)="addItem('monthly', index)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="m-t-20" *ngIf="selectedSequence == 'yearly'">
+                    <div class="startTime-select-row full-w" *ngFor="let selectedYearlyData of listSelectedYearlyData ; let index = index" fxLayout="row">
+                        <mat-form-field class="" floatPlaceholder="always">
+                            <mat-select [disabled]="!isDisabled" placeholder="Select day" [(ngModel)]="selectedYearlyData.day">
+                                <mat-option *ngFor="let dayInMonth of dayInMonths;" [value]="dayInMonth">
+                                    {{ dayInMonth }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="" floatPlaceholder="always">
+                            <mat-select [disabled]="!isDisabled" placeholder="Select month" [(ngModel)]="selectedYearlyData.month">
+                                <mat-option *ngFor="let monthInYear of monthInYears" [value]="monthInYear">
+                                    {{ monthInYear }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <button [disabled]="!isDisabled" *ngIf="listSelectedYearlyData.length > 1" mat-icon-button (click)="deleteItem('yearly', index)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                        <button [disabled]="!isDisabled" mat-icon-button (click)="addItem('yearly', index)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="m-t-20" *ngIf="selectedSequence == 'weekly'">
+                    <span>Every</span>
+
+                    <section class="m-t-10">
+                        <mat-checkbox [disabled]="!isDisabled" fxFlex="25" [(ngModel)]="monday">Monday</mat-checkbox>
+                        <mat-checkbox [disabled]="!isDisabled" fxFlex="25" [(ngModel)]="tuesday">Tuesday</mat-checkbox>
+                        <mat-checkbox [disabled]="!isDisabled" fxFlex="25" [(ngModel)]="wednesday">Wednesday</mat-checkbox>
+                        <mat-checkbox [disabled]="!isDisabled" fxFlex="25" [(ngModel)]="thursday">Thursday</mat-checkbox>
+                    </section>
+                    <section class="m-t-5">
+                        <mat-checkbox [disabled]="!isDisabled" fxFlex="25" [(ngModel)]="friday">Friday</mat-checkbox>
+                        <mat-checkbox [disabled]="!isDisabled" fxFlex="25" [(ngModel)]="saturday">Saturday</mat-checkbox>
+                        <mat-checkbox [disabled]="!isDisabled" fxFlex="25" [(ngModel)]="sunday">Sunday</mat-checkbox>
+                    </section>
+                </div>
+
+                <div class="p-y-20">
+                    <div *ngFor="let item of lsStartTime;let i=index" fxLayout="row" fxLayoutAlign="start center">
+                        <!-- <label fxFlex="20" fxFlexOffset="10">Start Time</label> -->
+                        <label class="m-x-20">Start Time</label>
+                        <div>
+                            <input type="time">
+                        </div>
+                        <div fxLayout="row">
+                            <button mat-icon-button *ngIf="i > 0">
+                                <mat-icon (click)="removeStartTime(i)">indeterminate_check_box</mat-icon>
+                            </button>
+                            <button mat-icon-button class="p-x-5">
+                                <mat-icon (click)="addStartTime(i)">add_box</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div fxLayoutAlign="end center" class="m-y-5">
+        <button class="red-btn" type="button" mat-button> Save </button>
+    </div>
+</div>

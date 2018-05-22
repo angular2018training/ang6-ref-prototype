@@ -1,0 +1,46 @@
+@import '~styles/variables';
+@import '~styles/styles';
+@import '~styles/es-navi';
+
+.customer-table-container {
+  overflow: hidden;
+  margin: 10px 0;
+  height: 100%;
+}
+.customer-table {
+  height: calc(100% - 44px);
+}
+
+.chiller-detail {
+    margin: 10px 0 !important;
+}
+.chiler-detail-head{
+
+}
+
+.chiler-detail-head .mat-form-field {
+    width: 60%;
+}
+.show-hide {
+    position: absolute;
+    top: -8px;
+    right: 30px;
+    border-right: solid 5px #FFF;
+    border-left: solid 5px #FFF;
+    display: block;
+    background-color: #fff;    
+}
+.show-hide button {
+    border: solid 1px #555555;
+    border-radius: 0px;
+    min-width: 0;
+    padding: 0 2px;
+    line-height: 24px;
+}
+.chiler-detail-head fieldset {
+    position: relative;
+    border-radius: 5px;
+}
+.display-none {
+    transition: display 2s;
+}

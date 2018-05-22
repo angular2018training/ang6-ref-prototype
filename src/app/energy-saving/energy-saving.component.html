@@ -1,0 +1,316 @@
+<!-- <div class="energy_saving_bound" id="id_energy_saving_bound">
+  <div class="energy_saving_header" *ngIf="isFilter">
+    <mat-form-field floatPlaceholder="always">
+      <mat-select placeholder="Customer Name" [(ngModel)]="customerName">
+        <mat-option *ngFor="let item of customerNames" [value]="item.id">
+          {{ item.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field floatPlaceholder="always">
+      <mat-select placeholder="Report Type" [(ngModel)]="reportType">
+        <mat-option *ngFor="let item of reportTypes" [value]="item.id">
+          {{ item.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <mat-form-field fxFlex floatPlaceholder="always" class="width-row">
+        <input matInput [matDatepicker]="startDatepicker" placeholder="From Month">
+        <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatepicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field fxFlex floatPlaceholder="always" class="m-l-20 width-row">
+        <input matInput [matDatepicker]="endDatepicker" placeholder="To Month">
+        <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="flex_row_right">
+      <button type="button" mat-button class="red-btn" (click)="showReport()">Show Report</button>
+    </div>
+  </div>
+  <div class="energy_saving_content" *ngIf="isReport" id="id_energy_saving_content">
+    <div class="flex_row_right">
+      <button type="button" mat-button class="red-btn" (click)="exportPDF()">Export PDF</button>
+      <button type="button" mat-button class="red-btn" (click)="filter()">{{strFilter}}</button>
+    </div>
+    <div class="energy_saving_content_info" id="infoCustomter">
+      <div>
+        <label>Customer Name</label>
+        <p>Helios GCS Viet Nam</p>
+      </div>
+      <div>
+        <label>Location</label>
+        <p>Ho Chi Minh, Viet Nam</p>
+      </div>
+      <div>
+        <label>Period of Report</label>
+        <p>10/01/2017 - 10/31/2017</p>
+      </div>
+      <div>
+        <label>Baseline Unit</label>
+        <p>1.1 kW/RT</p>
+      </div>
+      <div>
+        <label>Actual Energy Consumption</label>
+        <p>252,563.67 kWh After adjustment</p>
+      </div>
+      <div>
+        <label>Energy Savings</label>
+        <p>14,296 kWh</p>
+      </div>
+      <div>
+        <label>Cost Savings in total</label>
+        <p>2,144.45 SGD</p>
+      </div>
+      <div>
+        <label>Number of ES-Navi instruction</label>
+        <p>Helios GCS Viet Nam</p>
+      </div>
+      <div>
+        <label>Number of executed ES-Navi instruction</label>
+        <p>85 (B)</p>
+      </div>
+      <div>
+        <label>Number of NOT excuted ES-Navi instruction</label>
+        <p>5 (C)</p>
+      </div>
+    </div>
+    <div class="energy_saving_chart" id="id_energy_saving_chart">
+      <div style="display: block">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [colors]="chartColors"
+          [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+    <div class="energy_saving_content_table" id="energy_saving_table" style="background-color:#ffffff">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Weekday</th>
+            <th>Load</th>
+            <th>Baseline Energy Consumption</th>
+            <th>Actual Energy</th>
+            <th colspan="3">ES-Navi Guidance</th>
+            <th>Duration w/o gudance</th>
+            <th>Adjusted Actual Energy Consumption</th>
+            <th>Energy Savings in total</th>
+            <th>Cost Savings</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>RTh/Day</th>
+            <th>kWh/Day</th>
+            <th>kWh/Day</th>
+            <th>(A)</th>
+            <th>(B)</th>
+            <th>(C)</th>
+            <th>Hours</th>
+            <th>kWh/Day</th>
+            <th>kWh/Day</th>
+            <th>SGD/Day</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filterData">
+            <td>{{item.date}}</td>
+            <td class="text-left">{{item.weekday}}</td>
+            <td>{{item.load}}</td>
+            <td>{{item.baseline}}</td>
+            <td>{{item.actual}}</td>
+            <td>{{item.esNaviA}}</td>
+            <td>{{item.esNaviB}}</td>
+            <td>{{item.esNaviC}}</td>
+            <td>{{item.duration}}</td>
+            <td>{{item.adjusted}}</td>
+            <td>{{item.energy}}</td>
+            <td>{{item.cost}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="energy_saving_paging" *ngIf="isReport">
+    <span>{{paging.startRow}}-{{paging.endRow}} of {{this.dataTable.length}}</span>
+    <div *ngFor="let item of paging.pages" [class.active]="paging.currentPage==item" (click)="goToPage(item)">{{item}}</div>
+  </div>
+</div> -->
+
+
+<!-- <div class="energy-consumption"> -->
+<div class="full-h p-x-10">
+  <!-- <div class="energy-consumption-filter p-y-20" fxLayout="column" [class.display-none]="isHide"> -->
+  <div class="energy-consumption-filter p-y-20" fxLayout="column" *ngIf="isFilter">
+    <div>
+      <mat-form-field floatPlaceholder="always">
+        <mat-select placeholder="Customer Name" [(ngModel)]="customerName">
+          <mat-option *ngFor="let item of customerNames" [value]="item.id">
+            {{ item.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field floatPlaceholder="always">
+        <mat-select placeholder="Report Type" [(ngModel)]="reportType">
+          <mat-option *ngFor="let item of reportTypes" [value]="item.id">
+            {{ item.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="49">
+        <mat-form-field fxFlex floatPlaceholder="always" class="width-row">
+          <input matInput [matDatepicker]="startDatepicker" placeholder="From Month">
+          <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxFlex="49">
+        <mat-form-field fxFlex floatPlaceholder="always" class="width-row">
+          <input matInput [matDatepicker]="endDatepicker" placeholder="To Month">
+          <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div>
+      <div fxFlex></div>
+      <div>
+        <button type="button" mat-button class="red-btn" (click)="showReport()">Show Report</button>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="energy-consumption-report" [class.display-none]="!isShow" id="energy-consumption-report"> -->
+  <div class="energy-consumption-report" *ngIf="isReport" id="energy-consumption-report">
+  <!-- <div class="energy-consumption-report" id="energy-consumption-report"> -->
+    <div>
+      <div fxFlex></div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="45">
+          <!-- <app-export-pdf></app-export-pdf> -->
+          <button type="button" mat-button class="red-btn" (click)="exportPDF()">Export PDF</button>
+        </div>
+        <div fxFlex="45">
+          <!-- <button type="button" mat-button class="red-btn" [class.display-none]="!isHide" (click)="showFilter()">Show Filter</button>
+          <button type="button" mat-button class="red-btn" [class.display-none]="isHide" (click)="showFilter()">Hide Filter</button> -->
+          <button type="button" mat-button class="red-btn" (click)="filter()">{{strFilter}}</button>
+        </div>
+      </div>
+    </div>
+    <div id="graph">
+      <div fxLayout="column" class="customer-info" id="infoCustomter">
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Customer Name</div>
+          <div>Helios GCS Viet Nam</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Location</div>
+          <div>Ho Chi Minh, Viet Nam</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Period of Report</div>
+          <div>10/01/2017 - 10/31/2017</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Baseline Unit</div>
+          <div>11kW/RT</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Actual Energy Consumption</div>
+          <div>252,563.67 kWh After adjustment</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Energy Savings</div>
+          <div>14,296 kWh</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Cost Savings in total</div>
+          <div>2,144.45 SGD</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Number of ES-Navi instruction</div>
+          <div>90 (A)</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Number of excuted ES-Navi instruction</div>
+          <div>85 (B)</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Number of NOT excuted ES-Navi instruction</div>
+          <div>5 (C)</div>
+        </div>
+      </div>
+      <div class="chart">
+        <div fxLayout="column" fxLayoutAlign="center none">
+          <div id="titleChart">
+            <div>Daily Energy Savings</div>
+          </div>
+          <div style="display: block" fxFlex="100">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [colors]="chartColors"
+            [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="table" id="tableEnergy">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Weekday</th>
+              <th>Load</th>
+              <th>Baseline Energy Consumption</th>
+              <th>Actual Energy Consumption</th>
+              <th colspan="3">ES-Navi Guidance</th>
+              <th>Duration w/o guidance</th>
+              <th>Adjusted Actual Energy Consumption</th>
+              <th>Energy Savings in total</th>
+              <th>Cost Savings in total</th>
+            </tr>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>RTh/Day</th>
+              <th>kWh/Day</th>
+              <th>kWh/Day</th>
+              <th>(A)</th>
+              <th>(B)</th>
+              <th>(C)</th>
+              <th>Hours</th>
+              <th>kWh/Day</th>
+              <th>kWh/Day</th>
+              <th>SGD/Day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of filterData">
+              <td>{{item.date}}</td>
+              <td class="text-left">{{item.weekday}}</td>
+              <td>{{item.load}}</td>
+              <td>{{item.baseline}}</td>
+              <td>{{item.actual}}</td>
+              <td>{{item.esNaviA}}</td>
+              <td>{{item.esNaviB}}</td>
+              <td>{{item.esNaviC}}</td>
+              <td>{{item.duration}}</td>
+              <td>{{item.adjusted}}</td>
+              <td>{{item.energy}}</td>
+              <td>{{item.cost}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- <div class="energy_saving_paging">
+      <span>{{paging.startRow}}-{{paging.endRow}} of {{this.dataTable.length}}</span>
+      <div *ngFor="let item of paging.pages" [class.active]="paging.currentPage==item" (click)="goToPage(item)">{{item}}</div>
+    </div> -->
+  </div>
+  <div class="energy_saving_paging" *ngIf="isReport">
+    <span>{{paging.startRow}}-{{paging.endRow}} of {{this.dataTable.length}}</span>
+    <div *ngFor="let item of paging.pages" [class.active]="paging.currentPage==item" (click)="goToPage(item)">{{item}}</div>
+  </div>
+</div>

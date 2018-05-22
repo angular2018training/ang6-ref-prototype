@@ -1,0 +1,20 @@
+@import '~styles/variables';
+
+.schedule-setting-container {
+  height: calc(100% - 30px - 36px - 20px - 10px);
+  overflow: auto;
+}
+
+.field-set-wrapper {
+  height: calc(100% - 20px - 4px);
+  overflow: hidden;
+}
+
+.scroll-content {
+  overflow: auto;
+  height: 100%;
+}
+
+.startTime-select-row mat-form-field {
+  width: 25%;
+}

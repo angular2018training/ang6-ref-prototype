@@ -1,0 +1,89 @@
+<div class="update-cooling dialog">
+    <div fxLayout="row" class="dialog-header">
+        <span fxFlex>Backup CT - {{data.name}}</span>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon class="color-2" aria-label="Close">close</mat-icon>
+        </button>
+    </div>
+    <div class="dialog-content">
+        <div class="inputDialog">
+            <!-- <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Cooling Tower ID" [(ngModel)]="data.id">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div> -->
+            <div>
+                    <mat-form-field floatPlaceholder="always">
+                        <input matInput required placeholder="Simulator Index" [(ngModel)]="data.index">
+                        <mat-error align="right">This field is required</mat-error>
+                    </mat-form-field>
+                </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput disabled placeholder="Integrated CT List" [(ngModel)]="data.integratedCTList">
+                    <!-- <mat-error align="right">This field is required</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Cooling Tower Name" [(ngModel)]="data.name">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Input Power[kW]" [(ngModel)]="data.inputPower">
+                    <!-- <mat-error align="right">This field is required</mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Water Flow Rate[m3/min]" [(ngModel)]="data.waterFlowRate">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Outdoor Wet-bulb Temperature[C]" [(ngModel)]="data.outdoorWetBuilb">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Air Volume[m3/min]" [(ngModel)]="data.airVolume">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Maximum Air Volume Rate[-]" [(ngModel)]="data.maxAir">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Minimum Air Volume rate[-]" [(ngModel)]="data.minAir">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Rated Frequency[Hz]" [(ngModel)]="data.ratedFrequency">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Default Value When Status Is Off[C]" [(ngModel)]="data.defaultValue">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Related CTS" [(ngModel)]="data.relatedCTS" disabled>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="divider-h"></div>
+    <mat-dialog-actions class="dialog-footer ">
+        <button mat-button [mat-dialog-close]="data">Set Default Values</button>
+        <div fxFlex></div>
+        <button mat-button [mat-dialog-close]="data" [disabled]="compareData()">Save</button>
+    </mat-dialog-actions>
+</div>

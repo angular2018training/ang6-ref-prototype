@@ -1,0 +1,80 @@
+<div class="operator-detail">
+  <div class="operator-information">
+    <fieldset>
+      <legend>Operator Information</legend>
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="Operator ID" disabled>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="First Name" required autofocus [(ngModel)]="data.firstname">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="Last Name" required [(ngModel)]="data.lastname">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="Phone" required [(ngModel)]="data.phone">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="Email" required [(ngModel)]="data.email">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <div class="checkbox-label">
+          <label for="">Status</label>
+        </div>
+        <div class="p-y-10">
+          <mat-radio-group [(ngModel)]="isActive">
+            <mat-radio-button checked>Active</mat-radio-button>
+            <mat-radio-button>Inactive</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="login-details">
+    <fieldset>
+      <legend>Login Details</legend>
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="Username" type="text" required>
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="New Password" type="password" required [(ngModel)]="data.newPassword">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+        <mat-icon class="user_add_question">question_answer</mat-icon>          
+      </div>
+      <!-- <div></div> -->
+      
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="Confirm New Password" type="password" required [(ngModel)]="data.confirmNewPassword">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+    </fieldset>
+  </div>
+  <div>
+    <div>
+      <div fxFlex></div>
+      <button type="button" mat-button class="red-btn m-x-5">Cancel</button>
+      <button type="button" mat-button class="red-btn">Save</button>
+    </div>
+  </div>
+</div>

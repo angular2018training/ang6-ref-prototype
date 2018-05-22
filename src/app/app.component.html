@@ -1,0 +1,47 @@
+<!--The whole content below can be removed with the new code.-->
+<!-- <div fxLayout="column" fxFill>
+  <app-heading></app-heading>
+  <div class="divider"></div>
+  <app-navigation></app-navigation>
+  <breadcrumb ></breadcrumb>
+  <div class="m-x-20 divider-h"></div>
+  <div class="p-x-20" fxFlex>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</div> -->
+
+
+<div *ngIf="isLogin; then login else notLogin"></div>
+<ng-template #login>
+  <div fxLayout="column" fxFill>
+    <app-heading></app-heading>
+    <div class="divider"></div>
+    <app-navigation></app-navigation>
+    <breadcrumb></breadcrumb>
+    <div class="page-content" fxFlex>
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</ng-template>
+
+<!-- <ng-template #notLogin>
+  <login (checkLogin)="handleLogin($event)" *ngIf="currentPage==pageNotLogin.LOGIN"></login>  
+  <change-password *ngIf="currentPage==pageNotLogin.CHANGE_PASSWORD"></change-password>
+  <reset-password *ngIf="currentPage==pageNotLogin.RESET_PASSWORD"></reset-password>
+</ng-template> -->
+
+<ng-template #notLogin>
+  <!-- <app-heading></app-heading>
+  <div class="page-content" fxFlex>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer> -->
+  
+  <div class="page_common_bound">
+      <div class="page_common_header"></div>
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+  </div>  
+</ng-template>

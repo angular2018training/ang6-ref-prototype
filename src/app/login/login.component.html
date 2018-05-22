@@ -1,0 +1,62 @@
+<!-- <div class="login_bound">
+  <div class="login_header"></div>
+  <div class="login_content">
+    <div class="login-title">
+      <span>ES-NAVI SYSTEM</span>
+    </div>
+    <div class="login_content_detail">
+      <div class="login_for_input">
+        <label for="">Email: </label>
+        <div class="search-box" fxLayout="row">
+          <input type="text" placeholder="Email" [(ngModel)]="account.username" (keyup.enter)="signIn()" autofocus />
+        </div>
+      </div>
+      <div class="login_for_input">
+        <label for="">Password: </label>
+        <div class="search-box" fxLayout="row">
+          <input type="password" placeholder="Password" [(ngModel)]="account.password" (keyup.enter)="signIn()" />
+        </div>
+      </div>
+
+      <div class="login_for_input">
+        <label></label>
+        <div class="login_for_input_bound_siginin">
+          <mat-checkbox>Remember me</mat-checkbox>
+          <button class="red-btn" type="button" mat-button (click)="signIn()">Sign In</button>
+        </div>
+      </div>
+      <span (click)="forgotPassword()">Forgot Password?</span>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div> -->
+
+<div class="login_content">
+  <div class="login-title">
+    <span>ES-NAVI SYSTEM</span>
+  </div>
+  <div class="login_content_detail">
+    <div class="login_for_input">
+      <label for="">Login name: </label>
+      <div class="search-box" fxLayout="row">
+        <input type="text" placeholder="Login name" [(ngModel)]="account.username" (keyup.enter)="signIn()" autofocus />
+      </div>
+    </div>
+    <div class="login_for_input">
+      <label for="">Password: </label>
+      <div class="search-box" fxLayout="row">
+        <input type="password" placeholder="Password" [(ngModel)]="account.password" (keyup.enter)="signIn()" />
+      </div>
+    </div>
+
+    <div class="login_for_input">
+      <label></label>
+      <div class="login_for_input_bound_siginin">
+        <mat-checkbox [(ngModel)]="isRemember">Remember me</mat-checkbox>
+        <button class="red-btn" type="button" mat-button (click)="signIn()">Sign In</button>
+      </div>
+    </div>
+    <!-- <span (click)="forgotPassword()">Forgot Password?</span> -->
+    <span [routerLink]="'/change-password'">Forgot Password?</span>
+  </div>
+</div>

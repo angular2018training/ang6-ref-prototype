@@ -1,0 +1,78 @@
+<div class="add-chiller dialog">
+    <div fxLayout="row" class="dialog-header">
+        <span fxFlex>Chiller - {{data.name}}</span>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon class="color-2" aria-label="Close">close</mat-icon>
+        </button>
+    </div>
+
+    <div class="dialog-content">
+        <div class="inputDialog chiller-info">
+            <!-- <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Chiller ID" [(ngModel)]="data.id">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div> -->
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Simulator Index" [(ngModel)]="data.index">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Chiller Name" [(ngModel)]="data.name">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Cooling Capacity[RT]" [(ngModel)]="data.coolingCapacity">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Input Power[kW]" [(ngModel)]="data.inputPower">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <mat-select [(ngModel)]="data.type">
+                        <mat-option value="0">Type A</mat-option>
+                        <mat-option value="1">Type B</mat-option>
+                    </mat-select>
+                    <mat-placeholder>
+                        <span>Select Performance Curve</span>
+                    </mat-placeholder>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Entering Chilled Water Temperature[C]" [(ngModel)]="data.enteringChDT">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Enter Condenser Water Temperature[C]" [(ngModel)]="data.enteringCoDT">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Leaving Chilled Water Temperature[C]" [(ngModel)]="data.leavingChWT">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Leaving Condenser Water Temperature[C]" [(ngModel)]="data.leavingCoWT">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="divider-h "></div>
+    <mat-dialog-actions class="dialog-footer ">
+        <button mat-button [mat-dialog-close]="data">Set Default Values</button>
+        <div fxFlex></div>
+        <button mat-button [mat-dialog-close]="data" [disabled]="compareData()">Save</button>
+    </mat-dialog-actions>
+</div>

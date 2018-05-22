@@ -1,0 +1,66 @@
+<div fxFill fxLayout="column">
+    <div fxLayout="column" class="full-w">
+        <mat-checkbox>Using SMS Sender</mat-checkbox>
+
+        <div class="form-container" fxLayout="column">
+
+            <label class="form-container__title">Phone Number</label>
+
+            <!-- <mat-form-field floatPlaceholder="always" class="phonenumber-container__input">
+                <input matInput [(ngModel)]="phoneNumber">
+            </mat-form-field> -->
+
+            <div *ngFor="let item of listPhone" fxLayout="row" class="form-group" class="form-container__phone-input">
+                <p>{{item.id}}.</p>
+                <input type="text" class="form-control" [(ngModel)]="item.phoneNumber">
+                <div fxLayout="row" class="form-container__phone-input__group-icon">
+                    <mat-icon (click)="removePhone()">indeterminate_check_box</mat-icon>
+                    <mat-icon (click)="addPhone()">add_box</mat-icon>
+                </div>
+
+            </div>
+            
+            <div style="height:30px;"></div>
+
+            <div class="form-container__receive-checkbox">
+                <mat-checkbox>Receive report vie SMS</mat-checkbox>
+                <mat-icon>help</mat-icon>
+            </div>
+
+            <mat-form-field floatPlaceholder="always" class="form-container__selector">
+                <mat-select [(ngModel)]="selectedTime">
+                    <mat-option *ngFor="let time of times" [value]="time">
+                        {{ time }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="form-container__receive-checkbox">
+                <mat-checkbox>Receive alert via SMS</mat-checkbox>
+                <mat-icon>help</mat-icon>
+            </div>
+
+            <div class="form-container__receive-checkbox">
+                <mat-checkbox>Receive set points value via SMS</mat-checkbox>
+                <mat-icon>help</mat-icon>
+            </div>
+
+
+
+            <div class="form-container__button-group" fxLayout="row">
+                <div fxFlex class="m-l-20" fxLayoutAlign="center center">
+                    <button type="button" class="red-btn" mat-button> Cancel </button>
+
+                </div>
+
+                <div fxFlex class="m-l-20" fxLayoutAlign="center center">
+                    <button style="height: 36px;" class="red-btn" type="button" mat-button> Save </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

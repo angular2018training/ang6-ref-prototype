@@ -1,0 +1,24 @@
+@import '~styles/variables';
+@import '~styles/styles';
+@import '~styles/es-navi';
+
+.operator-detail {
+}
+.operator-detail > div {
+  padding: 20px;
+}
+.operator-detail fieldset {
+  padding: 20px;
+  border-radius: 5px;
+}
+.mat-form-field {
+  width: 60%;
+}
+.user_add_question{
+  margin-left: 5px;
+  border-radius: 20px;
+  background-color: #000;
+  color: white;
+  padding: 6px;
+  cursor: pointer;
+}

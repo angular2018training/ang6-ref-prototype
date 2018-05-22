@@ -1,0 +1,46 @@
+<div fxFill *ngIf="!isDetail" class="chiller-plant-list">
+  <div class="p-t-5" fxFlex fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="center" class="p-y-10">
+      <div fxFlex>
+        <button class="red-btn" type="button" mat-button (click)="showAddDialog()"> Create Chiller Plant </button>
+        <button class="red-btn m-x-5" type="button" mat-button (click)="showAddDialog('import')"> Import Chiller Plant </button>
+      </div>
+      <div class="search-box" fxLayout="row">
+        <input placeholder="Search" #filter />
+        <mat-icon>search</mat-icon>
+      </div>
+    </div>
+
+    <div fxFlex class="m-y-10" style="overflow:hidden; height: 100%">
+      <td-data-table #dataTable style="height:calc(100% - 44px)" [data]="filteredData" [columns]="columns" [selectable]="" [clickable]="true" (rowClick)="showDetail($event.row)"
+        [multiple]="" [sortBy]="sortBy" [(ngModel)]="selectedRows" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+        <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+          <div fxLayout="row">
+            <span matTooltip="View Detail" class="link-button" flex (click)="showDetail(row)">{{value}}</span>
+          </div>
+        </ng-template>
+        <ng-template tdDataTableTemplate="action" let-row="row">
+          <div fxLayout="row" fxLayoutAlign="end">
+
+            <button mat-icon-button>
+              <mat-icon (click)="showDeleteConfirm(row)" class="color-1" aria-label="Delete" matTooltip="Delete">delete</mat-icon>
+            </button>
+          </div>
+        </ng-template>
+      </td-data-table>
+      <td-paging-bar #pagingBar [pageSize]="pageSize" [total]="filteredTotal" (change)="page($event)">
+        <span hide-xs>Rows per page:</span>
+        <mat-select [style.width.px]="50" [(ngModel)]="pageSize">
+          <mat-option *ngFor="let size of pageSizes" [value]="size">
+            {{size}}
+          </mat-option>
+        </mat-select>
+        <span>{{pagingBar.range}}</span>
+        <span hide-xs>of {{pagingBar.total}}</span>
+      </td-paging-bar>
+    </div>
+  </div>
+</div>
+<div *ngIf="isDetail">
+  <app-chiller-plant-detail [cpSelected]="itemSelected" (isCancel)="updateIsDetail($event)"></app-chiller-plant-detail>
+</div>

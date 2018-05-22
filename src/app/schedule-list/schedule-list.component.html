@@ -1,0 +1,74 @@
+<div class="schedule-list">
+  <!-- <div *ngIf="currentState==; then list else notLogin"></div> -->
+  <!-- <div*ngIf="currentState==listState[0]" class="tab_schedule_list_header"> -->
+  <div class="schedule-list-header" fxLayout="column">
+    <div>
+      <span>Schedule List</span>
+    </div>
+    <div fxLayout="row" class="p-y-20">
+      <div fxFlex>
+        <schedule-create></schedule-create>
+      </div>
+      <div class="search-box schedule-list-search" fxLayout="row">
+        <!-- <input placeholder="Search" #filter /> -->
+        <input placeholder="Search" #filter [(ngModel)]="searchTerm" />
+        <mat-icon>search</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div class="schedule-table customer-table-container" fxLayout="column">
+    <td-data-table #dataTable class="customer-table" [data]="filteredData" [columns]="columns" [selectable]="" [clickable]=""
+      [multiple]="" [sortBy]="sortBy" [(ngModel)]="selectedRows" [sortOrder]="sortOrder" (sortChange)="sort($event)" style="height:calc(100% - 44px)">
+      <ng-template tdDataTableTemplate="scheduleName" let-value="value" let-row="row" let-column="column">
+        <div fxLayout="row">
+          <app-schedule-update [selectedSchedule]="row">
+          </app-schedule-update>
+        </div>
+      </ng-template>
+      <ng-template tdDataTableTemplate="scheduleType" let-value="value" let-row="row" let-column="column">
+        <div fxLayout="row">
+          {{displaySchedule(value)}}
+        </div>
+      </ng-template>
+      <ng-template tdDataTableTemplate="recurrence" let-value="value" let-row="row" let-column="column">
+        <div fxLayout="row">
+          {{row.recurrence.type}}
+        </div>
+      </ng-template>
+      <!-- <ng-template tdDataTableTemplate="days" let-value="value" let-row="row" let-column="column">
+        <div fxLayout="row">
+          <span *ngIf="row.recurrence.value.mon" class="p-x-5">Mon</span>
+          <span *ngIf="row.recurrence.value.tue" class="p-x-5">Tue</span>
+          <span *ngIf="row.recurrence.value.wed" class="p-x-5">Wed</span>
+          <span *ngIf="row.recurrence.value.thu" class="p-x-5">Thu</span>
+          <span *ngIf="row.recurrence.value.fri" class="p-x-5">Fri</span>
+          <span *ngIf="row.recurrence.value.sat" class="p-x-5">Sat</span>
+          <span *ngIf="row.recurrence.value.sun" class="p-x-5">Sun</span>
+        </div>
+      </ng-template> -->
+      <ng-template tdDataTableTemplate="type" let-value="value" let-row="row" let-column="column">
+        <div fxLayout="row">
+          <span *ngIf="row.type.id == 1">{{row.type.value}}</span>
+          <span *ngIf="row.type.id == 2">Every {{row.type.value.hour}} hour, {{row.type.value.minutes}} minutes</span>
+        </div>
+      </ng-template>
+      <ng-template tdDataTableTemplate="delete" let-row="row">
+        <div fxLayout="row">
+          <button mat-icon-button (click)="showDeleteConfirm(row)">
+            <mat-icon class="color-1" aria-label="Delete">delete</mat-icon>
+          </button>
+        </div>
+      </ng-template>
+    </td-data-table>
+    <td-paging-bar fxFlex #pagingBar [pageSize]="pageSize" [total]="filteredTotal" (change)="page($event)">
+      <span hide-xs>Rows per page:</span>
+      <mat-select [style.width.px]="50" [(ngModel)]="pageSize">
+        <mat-option *ngFor="let size of pageSizes" [value]="size">
+          {{size}}
+        </mat-option>
+      </mat-select>
+      <span>{{pagingBar.range}}</span>
+      <span hide-xs>of {{pagingBar.total}}</span>
+    </td-paging-bar>
+  </div>
+</div>

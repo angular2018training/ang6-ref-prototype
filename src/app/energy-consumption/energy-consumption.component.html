@@ -1,0 +1,134 @@
+<!-- div-waper -->
+<div class="energy-consumption">
+  <!-- filter -->
+  <div class="energy-consumption-filter p-y-20" fxLayout="column" [class.display-none]="isHide">
+    <div>
+      <mat-form-field floatPlaceholder="always">
+        <mat-select placeholder="Customer Name" [(ngModel)]="customerSelected">
+          <mat-option *ngFor="let item of customer" [value]="item.id">
+            {{ item.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field floatPlaceholder="always">
+        <mat-select placeholder="Report Type" [(ngModel)]="typeSelected">
+          <mat-option *ngFor="let item of reportType" [value]="item.id">
+            {{ item.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="49">
+        <mat-form-field fxFlex floatPlaceholder="always" class="width-row">
+          <input matInput [matDatepicker]="startDatepicker" placeholder="From Month">
+          <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxFlex="49">
+        <mat-form-field fxFlex floatPlaceholder="always" class="width-row">
+          <input matInput [matDatepicker]="endDatepicker" placeholder="To Month">
+          <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div>
+      <div fxFlex></div>
+      <div>
+        <button type="button" mat-button class="red-btn" (click)="showReport()">Show Report</button>
+      </div>
+    </div>
+  </div>
+  <!-- end-filter -->
+  <!-- report   -->
+  <div class="energy-consumption-report" [class.display-none]="!isShow" id="energy-consumption-report">
+    <!-- action -->
+    <div>
+      <div fxFlex></div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="45">
+          <app-export-pdf></app-export-pdf>
+        </div>
+        <div fxFlex="45">
+          <button type="button" mat-button class="red-btn" [class.display-none]="!isHide" (click)="showFilter()">Show Filter</button>
+          <button type="button" mat-button class="red-btn" [class.display-none]="isHide" (click)="showFilter()">Hide Filter</button>
+        </div>
+      </div>
+    </div>
+    <!-- end-action -->
+    <div id="graph">
+      <!-- info -->
+      <div fxLayout="column" class="customer-info" id="infoCustomter">
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Customer Name</div>
+          <div>Helios GCS Viet Nam</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Location</div>
+          <div>Ho Chi Minh, Viet Nam</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Period of Report</div>
+          <div>10/01/2017 - 10/31/2017</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Baseline Unit</div>
+          <div>11kW/RT</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="50">Actual Energy Consumption</div>
+          <div>252,563.67 kWh After adjustment</div>
+        </div>
+      </div>
+      <!-- end-info -->
+      <!-- chart -->
+      <div class="chart">
+        <div fxLayout="column" fxLayoutAlign="center none">
+          <div id="titleChart">
+            <div>Energy Consumption</div>
+          </div>
+          <div style="display: block" fxFlex="100">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+              [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="chartColors"></canvas>
+          </div>
+          <!-- <button (click)="randomize()">Update</button> -->
+        </div>
+      </div>
+      <!-- end-chart -->
+      <!-- table -->
+      <div class="table" id="tableEnergy">
+        <table>
+          <thead>
+            <th>Date</th>
+            <th>Weekday</th>
+            <th>Load (Rth/Day)</th>
+            <th>Baseline Energy Comsumption(kWh/Day)</th>
+            <th>Actual Energy Comsumption(kWh/Day)</th>
+            <th>Adjusted Actual Energy Comsumption(kWh/Day)</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of filterData">
+              <td>{{item.date}}</td>
+              <td class="text-left">{{item.weekday}}</td>
+              <td>{{item.load}}</td>
+              <td>{{item.baseline}}</td>
+              <td>{{item.actual}}</td>
+              <td>{{item.adjusted}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- end-table -->
+    </div>
+    <div class="energy_saving_paging">
+      <span>{{paging.startRow}}-{{paging.endRow}} of {{this.dataTable.length}}</span>
+      <div *ngFor="let item of paging.pages" [class.active]="paging.currentPage==item" (click)="goToPage(item)">{{item}}</div>
+    </div>
+  </div>
+  <!-- end-report   -->
+</div>
+<!-- end-div-waper -->

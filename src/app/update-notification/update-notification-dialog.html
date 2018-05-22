@@ -1,0 +1,51 @@
+<div class="update-notification dialog">
+    <div fxLayout="row" class="dialog-header">
+        <span fxFlex>SMS/Email Detail</span>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon class="color-2" aria-label="Close">close</mat-icon>
+        </button>
+    </div>
+    <div class="dialog-content">
+        <div class="inputDialog">
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input type="text" matInput disabled placeholder="No" [(ngModel)]="data.no">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <mat-select placeholder="Type Notification" [(ngModel)]="data.type" (change)="changeCountry($event)">
+                        <mat-option *ngFor="let type of types" [value]="type.id">
+                            {{type.label}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div *ngIf="data.type == 2">
+                <mat-form-field floatPlaceholder="always">
+                    <input type="email" matInput required placeholder="Email" [(ngModel)]="data.phone">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div *ngIf="data.type == 1">
+                <mat-form-field floatPlaceholder="always">
+                    <input type="tel" matInput required placeholder="Phone Number" [(ngModel)]="data.phone">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="p-y-10">
+                <mat-checkbox [(ngModel)]="data.setPoint">Set Points Notification</mat-checkbox>
+            </div>
+            <div class="p-y-10">
+                <mat-checkbox [(ngModel)]="data.report">Report Notification</mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="divider-h "></div>
+    <mat-dialog-actions class="dialog-footer ">
+        <div fxFlex></div>
+        <!-- <button mat-button mat-dialog-close>No</button> -->
+        <!-- Can optionally provide a result for the closing dialog. -->
+        <button mat-button [mat-dialog-close]="data" [disabled]="compareData()">Save</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,127 @@
+<div fxFill fxLayout="column">
+  <mat-tab-group class="custom-tab m-y-5" [(selectedIndex)]="selectedTabIndex">
+    <mat-tab label="Default Parameter">
+      <!-- <div fxLayout="column" class="create-customer-container" *ngIf="selectedTabIndex === 0">
+
+        <fieldset class="information">
+          <legend>Default Parameter</legend>
+          <div>
+            <mat-form-field floatPlaceholder="always" class="{{'opacity07'}}">
+              <input disabled matInput placeholder="Customer ID" [(ngModel)]="customerID">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field floatPlaceholder="always">
+              <input matInput required placeholder="Customer Name" [(ngModel)]="customerName">
+              <mat-error align="right">This field is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field floatPlaceholder="always">
+              <mat-select placeholder="Country" [(ngModel)]="arrayProvinces[0].countryID" (change)="changeCountry($event)">
+                <mat-option *ngFor="let country of arrayProvinces[0].provinces" [value]="country.id">
+                  {{country.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field floatPlaceholder="always">
+              <mat-select placeholder="Province" [(ngModel)]="arrayProvinces[1].countryID" (change)="changeProvince($event)">
+                <mat-option *ngFor="let province of arrayProvinces[1].provinces" [value]="province.id">
+                  {{ province.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field floatPlaceholder="always">
+              <input matInput placeholder="Address" [(ngModel)]="address">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field floatPlaceholder="always">
+              <input matInput required placeholder="Email" [(ngModel)]="email">
+              <mat-error align="right">This field is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field floatPlaceholder="always">
+              <input matInput required placeholder="Phone Number" [(ngModel)]="phoneNumber">
+              <mat-error align="right">This field is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field floatPlaceholder="always">
+              <mat-select placeholder="Time Zone" [(ngModel)]="selectedTimeZone" (change)="changeProvince($event)">
+                <mat-option *ngFor="let timeZone of timeZones" [value]="timeZone.uct">
+                  {{ timeZone.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </fieldset>
+        <fieldset class="login-detail">
+          <legend>Performance Curve</legend>
+          <div>
+            <div>
+              <mat-form-field floatPlaceholder="always">
+                <input matInput placeholder="Username" type="text" [(ngModel)]="userName">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field floatPlaceholder="always">
+                <input matInput placeholder="Password" type="password" [(ngModel)]="password">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field floatPlaceholder="always">
+                <input matInput placeholder="Confirm Password" type="password" [(ngModel)]="confirmPassword">
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+        <div fxLayout="row" fxLayoutAlign="end center" class="m-y-5 full-w">
+          <button [routerLink]="'/customer-management/customer-list'" class="red-btn m-l-20" type="button" mat-button> Cancel </button>
+          <button (click)="showSuccess()" class="red-btn m-l-20" type="button" mat-button> Save </button>
+        </div>
+      </div> -->
+
+      <!-- <div class="m-t-10" style="height:calc(100% - 44px)">
+        <td-data-table #dataTable [data]="filteredData" [columns]="columns" [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+            <ng-template tdDataTableTemplate="value" let-value="value" let-row="row" let-column="column">
+              <div fxLayout="row">
+                <input class="system_parameter_value" type="text" (click)="clickText($event)" (change)="modelChangeText($event,row)" [value]="row.value">
+              </div>
+            </ng-template>
+          </td-data-table>          
+      </div>
+      <div>
+        <div fxFlex></div>
+        <button class="red-btn" type="button" mat-button (click)="save()">Save</button>
+      </div> -->
+
+      <!-- <td-data-table #dataTable style="height:calc(100% - 44px)" [data]="filteredData" [columns]="columns" [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)"> -->
+      <td-data-table #dataTable class="m-y-10" style="height:calc(100% - 56px)" [data]="filteredData" [columns]="columns" [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+        <ng-template tdDataTableTemplate="value" let-value="value" let-row="row" let-column="column">
+          <div fxLayout="row">
+            <input class="system_parameter_value" type="text" (click)="clickText($event)" (change)="modelChangeText($event,row)" [value]="row.value" (keydown)="preventText($event)">
+          </div>
+        </ng-template>
+      </td-data-table>
+      <div>
+        <div fxFlex></div>
+        <button class="red-btn" type="button" mat-button (click)="save()">Save</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Performance Curve">
+      <!-- <div class="full-h" *ngIf="selectedTabIndex === 1">
+        <app-chiller-plants></app-chiller-plants>
+      </div> -->
+      <div class="full-h" *ngIf="selectedTabIndex === 1">
+        <performance-curve></performance-curve>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

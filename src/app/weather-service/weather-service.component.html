@@ -1,0 +1,35 @@
+<div class="wheather-service">
+  <div>
+    <div class="p-y-20">
+      <mat-checkbox [(ngModel)]="usingWS">Using Weather Service</mat-checkbox>
+    </div>
+    <div *ngIf="usingWS">
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="Rest API URL" required [(ngModel)]="dataCollector.restAPIURL">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="User Name" required [(ngModel)]="dataCollector.username">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field floatPlaceholder="always">
+          <input matInput placeholder="Password" type="password" required [(ngModel)]="dataCollector.password">
+          <mat-error align="right">This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row">
+        <div fxFlex></div>
+        <div>
+          <button type="button" mat-button class="red-btn">Test Connection</button>
+          <button type="button" mat-button class="red-btn m-l-5">Save</button>
+        </div>
+        <div fxFlex="40"></div>
+      </div>
+    </div>
+  </div>

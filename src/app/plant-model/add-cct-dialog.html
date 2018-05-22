@@ -1,0 +1,42 @@
+<div class="add-cooling dialog">
+    <div fxLayout="row" class="dialog-header">
+        <span fxFlex>Combined Cooling Tower - {{data.name}}</span>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon class="color-2" aria-label="Close">close</mat-icon>
+        </button>
+    </div>
+    <div class="dialog-content">
+        <div class="inputDialog">
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Simulator Index" [(ngModel)]="data.index" disabled>
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="CCT ID" [(ngModel)]="data.id" disabled>
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+            </div> -->
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="CCT Name" [(ngModel)]="data.name">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Number of CTs" [(ngModel)]="data.numOfNewCCT">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="divider-h "></div>
+    <mat-dialog-actions class="dialog-footer ">
+        <div fxFlex></div>
+        <!-- <button mat-button mat-dialog-close>No</button> -->
+        <!-- Can optionally provide a result for the closing dialog. -->
+        <button mat-button [mat-dialog-close]="data">Save</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,51 @@
+<div fxFill>
+
+    <div fxLayout="column" class="monotoring-execution-detail-container">
+        <mat-form-field floatPlaceholder="always" class="width-row-container">
+            <input matInput placeholder="ID" [(ngModel)]="customer.id">
+        </mat-form-field>
+
+        <mat-form-field floatPlaceholder="always" class="width-row-container">
+            <input matInput placeholder="Customer Name" [(ngModel)]="customer.customerName">
+        </mat-form-field>
+
+        <mat-form-field floatPlaceholder="always" class="width-row-container">
+            <input matInput placeholder="Chiller Plant Name" [(ngModel)]="customer.chillerPlantName">
+        </mat-form-field>
+
+        <mat-form-field floatPlaceholder="always" class="width-row-container">
+            <input matInput placeholder="Category" [(ngModel)]="customer.category">
+        </mat-form-field>
+
+        <div fxLayout="row" class="width-row-container                 ">
+            <mat-form-field fxFlex floatPlaceholder="always" class="width-row">
+                <input matInput [matDatepicker]="startTimepicker" placeholder="Start Time" [(ngModel)]="customer.startTime">
+                <mat-datepicker-toggle matSuffix [for]="startTimepicker"></mat-datepicker-toggle>
+                <mat-datepicker #startTimepicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field fxFlex floatPlaceholder="always" class="m-l-20 width-row">
+                <input matInput [matDatepicker]="endTimepicker" placeholder="End Time" [(ngModel)]="customer.endTime">
+                <mat-datepicker-toggle matSuffix [for]="endTimepicker"></mat-datepicker-toggle>
+                <mat-datepicker #endTimepicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field floatPlaceholder="always">
+            <input class="{{customer.status == 'Failure' ? 'link-button': ''}}" matInput placeholder="Status" [(ngModel)]="customer.status" (click)="showDialogErrorMessage()">
+        </mat-form-field>
+
+    </div>
+
+    <div>
+        <fieldset class="information p-t-20">
+            <legend>Optimal Set Points</legend>
+            <div class="optimal-set-point-table">
+                <td-data-table #dataTable [data]="filteredData" [columns]="columns" [selectable]="" [clickable]="" [multiple]="" [sortBy]="sortBy"
+                    [(ngModel)]="selectedRows" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+
+                </td-data-table>
+            </div>
+        </fieldset>
+    </div>
+
+</div>

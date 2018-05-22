@@ -1,0 +1,180 @@
+<div class="update-schedule dialog">
+    <div fxLayout="row" class="dialog-header">
+        <span fxFlex>Create Schedule</span>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon class="color-2" aria-label="Close">close</mat-icon>
+        </button>
+    </div>
+    <div class="dialog-content">
+        <div class="inputDialog">
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input type="text" matInput required placeholder="Schedule Name" [(ngModel)]="data.scheduleName">
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <mat-select placeholder="Status" [(ngModel)]="data.status">
+                        <mat-option *ngFor="let status of statusList" [value]="status">
+                            {{status}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <mat-select placeholder="Schedule Type" [(ngModel)]="item.type">
+                        <mat-option *ngFor="let item of types" [value]="item.id">
+                            {{item.label}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Schedule Settings</legend>
+                    <div fxLayout="column">
+                        <label class="schedule-label">Recurrence Pattern</label>
+                        <mat-radio-group [(ngModel)]="data.recurrence.type" fxLayoutAlign="space-between start">
+                            <mat-radio-button value="Daily">Daily</mat-radio-button>
+                            <mat-radio-button value="Weekly">Weekly</mat-radio-button>
+                            <mat-radio-button value="Monthly">Monthly</mat-radio-button>
+                            <mat-radio-button value="Yearly">Yearly</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div fxLayout="column" *ngIf="data.recurrence.type == 'Weekly'">
+                        <label class="schedule-label">Recurrence Pattern</label>
+                        <section fxLayout="row" fxLayoutAlign="space-between start">
+                            <div fxLayout="column">
+                                <mat-checkbox [(ngModel)]="data.recurrence.value.mon" (change)="log();">Monday</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="data.recurrence.value.fri">Friday</mat-checkbox>
+                            </div>
+                            <div fxLayout="column">
+                                <mat-checkbox [(ngModel)]="data.recurrence.value.tue">Tuesday</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="data.recurrence.value.sat">Saturday</mat-checkbox>
+                            </div>
+                            <div fxLayout="column">
+                                <mat-checkbox [(ngModel)]="data.recurrence.value.wed">Wednesday</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="data.recurrence.value.sun">Sunday</mat-checkbox>
+                            </div>
+                            <div fxLayout="column">
+                                <mat-checkbox [(ngModel)]="data.recurrence.value.thu">Thursday</mat-checkbox>
+
+                            </div>
+                        </section>
+                    </div>
+                    <div fxLayout="column" *ngIf="data.recurrence.type == 'Monthly'">
+                        <label class="schedule-label">{{textSelect}}</label>
+                        <div>
+                            <span>Day</span>
+                            <div>
+                                <div *ngFor="let item of dayInMonth;let i=index" class="create_schedule_bound_time">
+                                    <mat-form-field fxFlex floatPlaceholder="always">
+                                        <mat-select placeholder="Day In Month" [(ngModel)]="item.hour">
+                                            <mat-option *ngFor="let item of days" [value]="item">
+                                                {{ item }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <button mat-icon-button class="p-x-5">
+                                        <mat-icon (click)="addItem(dayInMonth,i)">add_box</mat-icon>
+                                    </button>
+                                    <button mat-icon-button *ngIf="i > 0">
+                                        <mat-icon (click)="removeItem(dayInMonth,i)">indeterminate_check_box</mat-icon>
+                                    </button>
+                                    <button mat-icon-button *ngIf="i == 0" class="create_schedule_dialog_empty"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="column" *ngIf="data.recurrence.type == 'Yearly'">
+                        <label class="schedule-label">{{textSelect}}</label>
+                        <div>
+                            <span>Date</span>
+                            <div class="create_schedule_dialog_select" *ngFor="let item of dayInYear;let i=index">
+                                <div fxLayout="row" fxFlex>
+                                    <mat-form-field fxFlex floatPlaceholder="always">
+                                        <mat-select placeholder="Day" [(ngModel)]="item.day">
+                                            <mat-option *ngFor="let item of days" [value]="item">
+                                                {{ item }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field fxFlex floatPlaceholder="always">
+                                        <mat-select placeholder="Month" [(ngModel)]="item.month">
+                                            <mat-option *ngFor="let item of months" [value]="item">
+                                                {{ item }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="row">
+                                    <button mat-icon-button class="p-x-5">
+                                        <mat-icon (click)="addItem(dayInYear,i)">add_box</mat-icon>
+                                    </button>
+                                    <button mat-icon-button *ngIf="i > 0">
+                                        <mat-icon (click)="removeItem(dayInYear,i)">indeterminate_check_box</mat-icon>
+                                    </button>
+                                    <button mat-icon-button *ngIf="i == 0" class="create_schedule_dialog_empty"></button>
+                                </div>
+                                <!-- <span class="warning" [style.visibility]="i==0?'visible':'hidden'">(The value for this combobox From 1->30)</span> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="column">
+                        <label class="schedule-label">Type</label>
+                        <mat-radio-group fxLayout="row" fxLayoutAlign="space-between center" [(ngModel)]="data.type.id">
+                            <mat-radio-button value="1">Time</mat-radio-button>
+                            <mat-radio-button value="2">Interval</mat-radio-button>
+                            <div fxFlex="50"></div>
+                        </mat-radio-group>
+                    </div>
+                    <div class="p-y-20" *ngIf="data.type.id =='1'">
+                        <div *ngFor="let item of startTimes;let i=index" fxLayout="row" fxLayoutAlign="start center">
+                            <label fxFlex="20" fxFlexOffset="10">Start Time</label>
+                            <div>
+                                <input type="time" [(ngModel)]="data.type.value">
+                            </div>
+                            <div fxLayout="row">
+                                <button mat-icon-button *ngIf="i > 0">
+                                    <mat-icon (click)="removeStartTime(i)">indeterminate_check_box</mat-icon>
+                                </button>
+                                <button mat-icon-button class="p-x-5">
+                                    <mat-icon (click)="addStartTime(i)">add_box</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-y-20" *ngIf="data.type.id =='2'" fxLayout="row" fxLayoutAlign="start center">
+                        <label fxFlex="20" fxFlexOffset="10">Repeating Interval</label>
+                        <div fxFlex="10">
+                            <mat-form-field floatPlaceholder="always">
+                                <mat-select placeholder="Hours" [(ngModel)]="data.type.value.hour">
+                                    <mat-option *ngFor="let item of hours" [value]="item">
+                                        {{ item }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="10" class="p-x-10">
+                            <mat-form-field floatPlaceholder="always">
+                                <mat-select placeholder="Minutes" [(ngModel)]="data.type.value.minutes">
+                                    <mat-option *ngFor="let item of minutes" [value]="item">
+                                        {{ item }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- <span class="warning">(Repeat interval 	&lt; 24h)</span> -->
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="divider-h "></div>
+    <mat-dialog-actions class="dialog-footer ">
+        <div fxFlex></div>
+        <button mat-button [mat-dialog-close]="data">Save</button>
+    </mat-dialog-actions>
+</div>

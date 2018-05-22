@@ -1,0 +1,33 @@
+@import '~styles/variables';
+
+
+.group_selection{
+    //background-color: chartreuse;
+    width:20%;
+    li{
+        text-decoration: underline;
+        cursor:pointer;
+        list-style:none;
+        color:red;
+    }
+}
+
+.tabData_all{
+    //background-color: aquamarine;
+    width:80%;
+    height:100%;
+    &__dateTimePicker{
+        //background-color: burlywood;
+        width: 60%;
+        display: flex;
+        justify-content: space-between;
+        &__searchButton{
+            //background-color: cadetblue;
+        }
+    }
+    &__table{
+        //background-color: cornflowerblue;
+        display: flex;
+        flex-direction: column !important;
+    }
+}

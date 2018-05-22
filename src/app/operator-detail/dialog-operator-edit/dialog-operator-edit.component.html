@@ -1,0 +1,133 @@
+<div class="dialog_bound">
+    <div fxLayout="row" class="dialog-header">
+        <span fxFlex>{{data.title}}</span>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon class="color-2" aria-label="Close">close</mat-icon>
+        </button>
+    </div>
+    <div class="dialog-content">
+        <h2>General Information</h2>
+        <!-- customer -->
+        <div class="general-info" *ngIf="role=='customer'">
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Customer ID" disabled value="001">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Customer Name" value="Justin" autofocus required>
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <mat-select placeholder="Country" [(ngModel)]="country">
+                        <mat-option value="1" selected>
+                            -- Select an option --
+                        </mat-option>
+                        <!-- <mat-option *ngFor="let item of reportType" [value]="item.id">
+                            {{ item.label }}
+                        </mat-option> -->
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <mat-select placeholder="Province" [(ngModel)]="province">
+                        <mat-option value="1" selected>
+                            -- Select an option --
+                        </mat-option>
+                        <!-- <mat-option *ngFor="let item of reportType" [value]="item.id">
+                                {{ item.label }}
+                            </mat-option> -->
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Address" value=" 9 Raffles Place, #39-00, Republic Plaza" autofocus required>
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Email" value="op01@hitachi.com">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Phone" value="1800 4722 669">
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- operator -->
+        <div class="general-info" *ngIf="role=='operator'">
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Operator ID" disabled value="001">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="First Name" value="Justin" autofocus required>
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Last Name" value="Timberlake" autofocus required>
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Email" value="op01@hitachi.com">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput required placeholder="Phone" value="1800 4722 669">
+                </mat-form-field>
+            </div>
+        </div>
+
+
+
+        <div fxLayout="row">
+            <div fxFlex></div>
+            <button class="red-btn m-l-20" type="button" mat-button [mat-dialog-close]="data">Update Detail</button>
+        </div>
+        <h2>Login Detail</h2>
+        <div class="login-detail">
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Username" value="gcsvn001" autofocus required>
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div *ngIf="role=='customer'">
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Current Password" type="password" required value="123456">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="New Password" type="password" required value="123456">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field floatPlaceholder="always">
+                    <input matInput placeholder="Confirm New Password" type="password" required value="123456">
+                    <mat-error align="right">This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex></div>
+                <button class="red-btn m-l-20" type="button" mat-button [mat-dialog-close]="data">Reset Password</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+@import '~styles/variables';
+
+.email-service-container mat-form-field {
+  width: 50%;
+}
+
+.email-service-container mat-radio-group {
+  width: 50%;
+}
+
+.email-service-content-wrapper {
+  height: calc(100% - 41px);
+}
